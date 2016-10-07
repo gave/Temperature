@@ -26,6 +26,10 @@ namespace Temperature.Controllers
             {
                 dev.GetMostRecentLog(out dt, out fl);
             }
+            else
+            {
+                return NotFound();
+            }
 
             return Ok(new Sensor { TimeValue = dt, Value = fl });
         }
@@ -37,11 +41,7 @@ namespace Temperature.Controllers
 
             var dev = tp.GetDeviceInfoByID((uint)id, 1);
 
-            //DateTime[] dates;
-            //float[] values;
             List<Sensor> sensors = new List<Sensor>();
-                sensors.Add(new Sensor { TimeValue = DateTime.Now, Value = 25 });
-            sensors.Add(new Sensor { TimeValue = DateTime.Now, Value = 25 });
 
             if (dev != null)
             {
