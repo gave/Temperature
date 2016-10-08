@@ -45,19 +45,18 @@ namespace Temperature.Controllers
 
             if (dev != null)
             {
-                object dates;
-                object values;
+                dynamic dates;
+                dynamic values;
                 dev.GetLog(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, DateTime.MinValue, out dates, out values);
                 int i = 0;
 
-                foreach (var d in (DateTime[])dates)
+                foreach (var d in dates)
                 {
-                    sensors.Add(new Sensor { TimeValue = d, Value = ((float[])values)[i++] });
+                    sensors.Add(new Sensor { TimeValue = DateTime.FromOADate(d), Value = values[i++] });
                 }
             }
 
             return sensors;
         }
-
     }
 }
