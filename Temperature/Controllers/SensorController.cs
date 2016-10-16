@@ -47,7 +47,9 @@ namespace Temperature.Controllers
             {
                 dynamic dates;
                 dynamic values;
-                dev.GetLog(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, DateTime.MinValue, out dates, out values);
+                var grain = DateTime.MinValue;
+
+                dev.GetLog(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, grain.AddMinutes(6), out dates, out values);
                 int i = 0;
 
                 foreach (var d in dates)
